@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery-3.6.0.min.js" type="text/javascript"></script>
+    <title>JQuery</title>
+</head>
+<body>
+    <div class="main">
+        <p><strong>Sidhdhesh Modi - 22087</strong></p>
+        <button id="loader" onclick="loadData()">LOAD!</button>  
+    </div>
+
+    <script type="text/javascript">
+        
+        loadData = () =>{
+            $('document').ready(() =>{
+                $.get("https://jsonplaceholder.typicode.com/posts", (res,status) => {
+                    let count = 0;
+                    showRecord(res, count);
+                });
+            })
+        }
+        showRecord = (res, count) => {
+            setTimeout(() => { 
+                $(".main").append(`<div class="comment">
+                    <h4>${res[count].title}</h4>
+                    <p>${res[count].body}</p>
+                </div>`);
+                count++;
+                showRecord(res, count);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
